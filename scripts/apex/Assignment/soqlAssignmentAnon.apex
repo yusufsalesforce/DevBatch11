@@ -1,0 +1,3 @@
+
+SoqlAssignment.contactList();
+SoqlAssignment.accountList();
