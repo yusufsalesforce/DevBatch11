@@ -7,6 +7,7 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
         }
         if (trigger.isUpdate) {
             System.debug('we are in before update');
+            ContactTriggerHandler.contactUpdateValidation1(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
         }
 
     }

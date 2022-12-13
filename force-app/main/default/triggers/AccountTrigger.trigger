@@ -1,4 +1,87 @@
 trigger AccountTrigger on Account (before insert, before update,after insert, after update) {
+    
+    if (trigger.isBefore) {
+        AccountTriggerHandler.updateDescription(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+    if (trigger.isBefore) {
+        System.debug('before insert/update trigger on Account object');
+        for (account eachAcc : trigger.new) {
+
+            if (trigger.isInsert && eachAcc.active__c == 'Yes') {
+                eachAcc.description = 'Account is now active. Enjoy!';
+            }
+
+            if (trigger.isUpdate) {
+
+                Account oldAccount = trigger.oldMap.get(eachAcc.id);
+                Account newAccount = trigger.newMap.get(eachAcc.id);
+
+                if (eachAcc.active__c == 'Yes' && oldAccount.active__c != newAccount.active__c) {
+                    
+                    eachAcc.description = 'Account is now active. Enjoy!';
+                }
+            }
+
+        }
+    }
+
+    */
+    /*
+    if (Trigger.isBefore) {
+        for (account eachAcc : Trigger.new) {
+            boolean updateDesc = false;
+            if (Trigger.isInsert && eachAcc.Active__c == 'Yes') {
+                //just update field
+                updateDesc = true;
+            }
+            //if account is updated.
+                //check if active field is changed from not yes to yes
+                //then update description
+            if (Trigger.isUpdate) {
+                //get old account using OldMAP
+                Account oldAccount = Trigger.OldMap.get(eachAcc.Id);
+                //get new account using newMap
+                Account newAccount = Trigger.NewMap.get(eachAcc.Id);
+                //oldAccount.Active__c != newAccount.Active__c
+                if (eachAcc.Active__c == 'Yes' &&
+                    oldAccount.Active__c != newAccount.Active__c ) {
+                    updateDesc = true;
+                }
+            }
+            if (updateDesc) {
+                eachAcc.Description = 'Account is now active. Enjoy buddy!!';
+            }
+        }
+    }
+
+    */
+
+
+
+
+
+    
+    
     /*
     if(trigger.isBefore && trigger.isInsert){
         System.debug('account before insert trigger.old ' + trigger.old);
@@ -92,6 +175,7 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
     }
     */
 
+    /*
     if (trigger.isAfter && trigger.isUpdate) {
         system.debug('after update trigger');
 
@@ -117,16 +201,7 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
         }
         system.debug('website updated for # of accounts => ' + countwebsite);
     }
-
-
-
-
-
-
-
-
-
-
+    */
 
 
 
