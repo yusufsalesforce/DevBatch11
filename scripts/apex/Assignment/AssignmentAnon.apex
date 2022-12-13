@@ -70,5 +70,14 @@ insert acc;
 ////// 7- 
 
 account accUni = [select id from account where name = 'Summer Fest LLC'];
-account acc = new account();
-acc.
+List<contact> cntList = new List<contact>();
+
+for (Integer i = 1; i <= 3; i++) {
+    contact cnt = new contact();
+    cnt.lastname = 'Event Planner ' + i;
+    cnt.phone = '+1 2345 7896';
+    cnt.leadSource = 'Web';
+    cnt.Accountid = accUni.id;
+    cntList.add(cnt);
+}
+insert cntList;
