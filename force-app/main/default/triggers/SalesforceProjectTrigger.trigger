@@ -1,7 +1,7 @@
-trigger SalesforceProjectTrigger on SOBJECT (before insert) {
+trigger SalesforceProjectTrigger on salesforce_project__c (after insert) {
     if (trigger.isAfter && trigger.isInsert) {
-        SalesforceProjectTriggerHandler.creatDefaultTicket(trigger.new);
-        
+        SalesforceProjectTriggerHandler.createDefaultTicket(Trigger.new);
+
     }
 
 }
