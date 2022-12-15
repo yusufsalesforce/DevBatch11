@@ -1,7 +1,14 @@
 trigger AccountTrigger on Account (before insert, before update,after insert, after update) {
     
-    if (trigger.isBefore) {
-        AccountTriggerHandler.updateDescription(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    if (trigger.isBefore && trigger.isUpdate) {
+        for (account acc : trigger.new) {
+            if (acc.phone != trigger.oldMap.get(acc.id).phone) {
+                acc.description = 'Telefon numarası değişti';
+            }
+            if (acc.name != trigger.oldMap.get(acc.id).name) {
+                acc.name.addError('İsim değişikliği yapamazsınız.!');
+            }
+        }
     }
 
 
@@ -13,10 +20,59 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
 
 
 
+    // 2. Bir account update edildiğinde name değişmişse description fieldine name değişti mesajı yazdır..
+    
+    /*
+    if (trigger.isBefore && trigger.isUpdate) {
+        for (account acc : trigger.new) {
+            if (acc.name != trigger.oldMap.get(acc.id).Name) {
+                acc.description = 'Bu record un ismi değişti';
+            }
+        }
+    }
+    */
 
 
 
 
+    //1 Account create edildiğinde. ona bağlı 7 tane Contact otomatik olarak create edilsin. first name'i account name ile aynı olsun. last name i contact 1 2 3.. diye isimlendirilsin..
+    /*
+    if (trigger.isAfter && trigger.isInsert) {
+
+        List<Contact> conList = new List<Contact>();
+
+        for (account acc : trigger.new) {
+            for (Integer i = 1; i <= 7; i++) {
+                contact c = new contact();
+                c.firstname = acc.name ;
+                c.lastname = 'Contact ' + i;
+                c.Accountid = acc.id;
+                conList.add(c);
+            }
+        }
+        insert conList;
+    }
+    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+    if (trigger.isBefore) {
+        AccountTriggerHandler.updateDescription(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+    */
 
 
 
