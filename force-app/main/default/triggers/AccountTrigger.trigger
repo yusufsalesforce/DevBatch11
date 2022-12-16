@@ -1,5 +1,34 @@
 trigger AccountTrigger on Account (before insert, before update,after insert, after update) {
     
+    if (Trigger.isAfter && Trigger.isUpdate ) {
+        AccountTriggerHandler.updateVIPforContacts(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+
+
+    
+
+
+    /*
+    // tr ödev - soru 22
+    if (Trigger.isBefore && Trigger.isUpdate) {
+        AccountTriggerHandler.annualRevenue(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+    */
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+    /*
     if (trigger.isBefore && trigger.isUpdate) {
         for (account acc : trigger.new) {
             if (acc.phone != trigger.oldMap.get(acc.id).phone) {
@@ -10,7 +39,7 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
             }
         }
     }
-
+    */
 
 
 

@@ -1,6 +1,18 @@
 public with sharing class ContactTriggerHandler {
+    
+    // tr ödev - soru 21
+    public static void updateDescription(List<contact> newList,
+    List<contact> oldList, Map<Id,contact> newMap, Map<Id,contact> oldMap) {
+        
+        for (contact item : newList) {
+            if (item.lastname != oldMap.get(item.id).lastname) {
+                item.description = 'LastName değiştirildi [' + oldMap.get(item.id).lastname + '] - [' + item.lastname + ']';
+            }
+        }
+    }
 
 
+    /*
     public static void contactUpdateValidation2(
         List<contact> conTriggerNew,
         List<contact> conTriggerOld,
@@ -27,7 +39,9 @@ public with sharing class ContactTriggerHandler {
                 eachContact.leadSource.addError('Cannot update Partner Refferal contact');
             }
         }
-        
+        */
+
+
         /*
         //^^ validation
         for (contact eachContact : conTriggerNew) {
@@ -37,5 +51,5 @@ public with sharing class ContactTriggerHandler {
             }
         }
         */
-    }
+    
 }
