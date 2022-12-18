@@ -1,17 +1,32 @@
 trigger AccountTrigger on Account (before insert, before update,after insert, after update) {
+
+    if (trigger.isAfter && trigger.isInsert) {
+        AccountTriggerHandler.createOppAndCnt(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
     
-    if (Trigger.isAfter && Trigger.isUpdate ) {
-        AccountTriggerHandler.updateVIPforContacts(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    if (trigger.isBefore && trigger.isInsert) {
+        AccountTriggerHandler.sameNameValidation(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
     }
 
-
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /*
-    // tr ödev - soru 22
-    if (Trigger.isBefore && Trigger.isUpdate) {
-        AccountTriggerHandler.annualRevenue(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+
+    if (Trigger.isAfter && Trigger.isUpdate ) {
+        AccountTriggerHandler.updateVIPforContacts(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
     }
     */
 
@@ -20,8 +35,12 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
 
 
 
-
-
+    /*
+    // tr ödev - soru 22
+    if (Trigger.isBefore && Trigger.isUpdate) {
+        AccountTriggerHandler.annualRevenue(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+    */
 
 
 

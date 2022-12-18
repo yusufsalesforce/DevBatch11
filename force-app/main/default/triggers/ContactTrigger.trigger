@@ -1,4 +1,4 @@
-trigger ContactTrigger on Contact (before insert, after insert, before update, after update) {
+trigger ContactTrigger on Contact (before insert, after insert, before update, after update, after delete, after undelete) {
     /*
     if (trigger.isBefore && trigger.isInsert ) {
         System.debug('Before Insert Trigger tetiklendi');
@@ -62,8 +62,57 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
     */
 
     // tr ödev - soru 21
+    /*
     if (Trigger.isBefore && Trigger.isUpdate) {
         ContactTriggerHandler.updateDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
+    */
+
+
+
+
+    // Soru : Yeni bir Contact create edilip bir Accounta bağlandığında,
+    // Accounta bağlı bir Contact delete edildiğinde
+    // veya Bir Contact update edilerek bir Account ile bağlantısı kesilirse, bir Accounta bağlanırsa ya da bağlantı değişirse
+    // Accountta Number_of_Contacts__c fieldi güncellenecek..
     
+    set<id> accountids = new Set<id>();
+
+    if (trigger.isAfter) {
+        if (trigger.isInsert || trigger.isUndelete) {
+            for (contact c : trigger.new) {
+                if (c.accountid != null) {
+                    accountids.add(c.accountid);
+                }
+            }
+        }
+
+        if (trigger.isBefore) {
+            for (contact c : trigger.new) {
+                if (c.accountid != trigger.oldMap.get(c.id).Accountid) {
+                    accountids.add(c.accountid);
+                    accountids.add(trigger.oldMap.get(c.id).Accountid);
+                }
+            }
+        }
+
+        if (trigger.isDelete) {
+            for (contact c : trigger.old) {
+                if (c.accountid != null) {
+                    accountids.add(c.accountid);
+                }
+            }
+        }
+
+    }
+
+    if (!accountids.isEmpty()) {
+        List<Account> accList = [select id, name, Number_Of_Contacts__c, (select id, name from Contacts) from Account where id in : accountids];
+
+        
+        for (account acc : accList) {
+            acc.Number_Of_Contacts__c = acc.Contacts.size();
+        }
+        update accList;
+    }
 }

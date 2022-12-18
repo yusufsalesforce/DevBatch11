@@ -1,5 +1,47 @@
 public class AccountTriggerHandler {
     
+    // soru 23 - Aynı isimde birden fazla Account oluşmasına müsade etmeyen ve kullanıcıya mesaj veren bir trigger (triggerHandlerClass) tasarlayınız. 
+    public static void sameNameValidation(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
+        
+        List<account> accList = [select id, name from Account where name = : newList[0].name];
+
+        if (accList.size()!=0) {
+            newList[0].name.addError('Ayni isimle ikinci account oluşturamazsiniz');
+        }
+
+    }
+
+
+
+    // soru 24 -Bir Account oluştuğunda, o Account'a bağlı bir Opportunity ve bir Contact oluşturan bir trigger (triggerHandlerClass) tasarlayınız.
+    public static void createOppAndCnt(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
+        List<Contact> cntList = new List<Contact>();
+        List<opportunity> oppList = new List<opportunity>();
+        for (account item : newList) {
+            System.debug(item.id);
+            contact cnt = new contact();
+            cnt.lastname = item.name + 'cnt';
+            cnt.Accountid = item.id;
+            cntList.add(cnt);
+
+            opportunity opp = new opportunity();
+            opp.name = item.name + 'opp';
+            opp.closeDate = date.newInstance(2022, 12, 25);
+            opp.stagename = 'Needs Analysis';
+            opp.Accountid = item.id;
+            oppList.add(opp);
+        }
+        insert cntList;
+        insert oppList;
+        
+    }
+
+
+
+
+
+
+    /*
     public static void updateVIPforContacts(List<Account> accTriggerNew, List<account> accTriggerOld, Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
 
         set<id> accIds = new set<id>();
@@ -16,7 +58,7 @@ public class AccountTriggerHandler {
         }
         update allContact;
     }
-    
+    */
 
 
 

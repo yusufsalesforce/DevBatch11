@@ -21,10 +21,7 @@ public class AssetHandler {
                 }
             }
         }
-        
     }
-
-
 }
 
 // •	Create an Apex trigger for Asset object.
