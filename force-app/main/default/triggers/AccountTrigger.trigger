@@ -1,14 +1,24 @@
 trigger AccountTrigger on Account (before insert, before update,after insert, after update) {
 
     if (trigger.isAfter && trigger.isInsert) {
-        AccountTriggerHandler.createOppAndCnt(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
-    }
-    
-    if (trigger.isBefore && trigger.isInsert) {
-        AccountTriggerHandler.sameNameValidation(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+        AccountHandler_assg.createContact(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
     }
 
-    
+
+
+
+    /*
+    if (trigger.isAfter && trigger.isInsert) {
+        AccountTriggerHandler.createOppAndCnt(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+
+    */
+    /*
+    if (trigger.isBefore && trigger.isInsert) {
+        AccountTriggerHandler.sameNameValidation1(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+
+    */
 
 
 

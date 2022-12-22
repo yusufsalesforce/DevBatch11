@@ -1,6 +1,11 @@
 public class AccountTriggerHandler {
     
+
+    
+
+
     // soru 23 - Aynı isimde birden fazla Account oluşmasına müsade etmeyen ve kullanıcıya mesaj veren bir trigger (triggerHandlerClass) tasarlayınız. 
+    /*
     public static void sameNameValidation(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
         
         List<account> accList = [select id, name from Account where name = : newList[0].name];
@@ -10,10 +15,79 @@ public class AccountTriggerHandler {
         }
 
     }
+    */
 
+    /*
+    public static void sameNameValidation1(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
+        
+        List<Account> accList = [select name from Account];
+
+        for (account accNew : newList) {
+            for (account accDataBase : accList) {
+                if (accNew.name==accDataBase.Name) {
+                    accNew.Name.addError('Ayni isimle ikinci account oluşturamazsiniz');
+                }
+            }
+        }
+    
+    }
+    */
+
+
+    /*
+    public static void sameNameValidation2(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
+        
+        Set<String> newSetName = new Set<String>();
+
+        for (account accNew : newList) {
+            newSetName.add(accNew.name);
+        }
+
+        List<Account> accList = [select id,name from Account where name in : newSetName];
+
+        if (accList.size()!=0) {
+            for (account accNew : newList) {
+                for (account accL : accList) {
+                    if (accNew.name == accL.name) {
+                        accNew.Name.addError('Ayni isimle ikinci account oluşturamazsiniz');
+                    }
+                }
+            }
+        }
+    }
+    */
+    /*
+    public static void sameNameValidation3(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
+        
+        Set<String> newSetName = new Set<String>();
+
+        for (account acc : newList) {
+            newSetName.add(acc.name);
+        }
+
+        List<Account> accList = [select name from Account where name in : newSetName];
+
+        if (accList.size()!=0) {
+
+            Set<String> accListName = new Set<String>();
+
+            for (account acc : accList) {
+                accListName.add(acc.name);
+            }
+
+            for (account acc : newList) {
+
+                if (accListName.contains(acc.name)) {
+                    acc.Name.addError('Ayni isimle ikinci account oluşturamazsiniz');
+                }
+            }
+        }
+    }
+    */
 
 
     // soru 24 -Bir Account oluştuğunda, o Account'a bağlı bir Opportunity ve bir Contact oluşturan bir trigger (triggerHandlerClass) tasarlayınız.
+    /*
     public static void createOppAndCnt(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
         List<Contact> cntList = new List<Contact>();
         List<opportunity> oppList = new List<opportunity>();
@@ -35,6 +109,7 @@ public class AccountTriggerHandler {
         insert oppList;
         
     }
+    */
 
 
 

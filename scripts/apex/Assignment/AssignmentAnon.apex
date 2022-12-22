@@ -81,3 +81,27 @@ for (Integer i = 1; i <= 3; i++) {
     cntList.add(cnt);
 }
 insert cntList;
+
+
+
+
+
+
+
+
+List<Account> accList = new List<Account>();
+Account acc = new Account();
+acc.name = 'Tr deneme 7';
+accList.add(acc);
+
+Account acc1 = new Account();
+acc1.name = 'Tr deneme 8';
+accList.add(acc1);
+
+Account acc2 = new Account();
+acc2.name = 'Tr deneme 9';
+accList.add(acc2);
+
+
+insert accList;
+System.debug(accList);

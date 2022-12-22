@@ -1,4 +1,19 @@
 trigger ContactTrigger on Contact (before insert, after insert, before update, after update, after delete, after undelete) {
+
+    //^^ Yeni bir Contact mevcut bir Accounta bağlı olarak oluşturulduğunda Contact other phone bağlı olduğu Account phone olsun.
+    //* version-1
+    if(Trigger.isAfter && Trigger.isInsert){
+        ContactTriggerHandler.otherPhone(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
+    }
+    //* version-2
+    if(Trigger.isBefore && Trigger.isInsert){
+        ContactTriggerHandler.otherPhone2(Trigger.new, Trigger.newMap);
+    }
+
+
+
+
+    
     /*
     if (trigger.isBefore && trigger.isInsert ) {
         System.debug('Before Insert Trigger tetiklendi');
@@ -75,7 +90,7 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
     // Accounta bağlı bir Contact delete edildiğinde
     // veya Bir Contact update edilerek bir Account ile bağlantısı kesilirse, bir Accounta bağlanırsa ya da bağlantı değişirse
     // Accountta Number_of_Contacts__c fieldi güncellenecek..
-    
+    /*
     set<id> accountids = new Set<id>();
 
     if (trigger.isAfter) {
@@ -115,4 +130,5 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
         }
         update accList;
     }
+    */
 }
