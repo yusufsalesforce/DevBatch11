@@ -1,4 +1,3 @@
-
 public class Calculator2 {
 
     public static void welcomeMessage(){
