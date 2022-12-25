@@ -116,28 +116,10 @@ public class AccountTriggerHandler {
 
 
 
-    /*
-    public static void updateVIPforContacts(List<Account> accTriggerNew, List<account> accTriggerOld, Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
-
-        set<id> accIds = new set<id>();
-
-        for (account item : accTriggerNew) {
-            if (item.VIP__c != accTriggerOldMap.get(item.id).VIP__c) {
-                accIds.add(item.id);
-            }
-        }
-        List<contact> allContact = [select id, vip__c, accountid from contact where accountid in :accIds];
-
-        for (contact item : allContact) {
-            item.vip__c = accTriggerNewMap.get(item.Accountid).vip__c;
-        }
-        update allContact;
-    }
-    */
-
-
-
-
+    
+    
+    
+    
     // tr ödev - soru 22
     /*
     public static void annualRevenue(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
@@ -157,13 +139,28 @@ public class AccountTriggerHandler {
 
     }
     */
+    
+    
+    
+    
+    public static void updateVIPforContacts(List<Account> accTriggerNew, List<account> accTriggerOld, Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
 
+        set<id> accIds = new set<id>();
 
+        for (account item : accTriggerNew) {
+            if (item.VIP__c != accTriggerOldMap.get(item.id).VIP__c) {
+                accIds.add(item.id);
+            }
+        }
+        List<contact> allContact = [select id, vip__c, accountid from contact where accountid in :accIds];
 
-
-
-
-    /*
+        for (contact item : allContact) {
+            item.vip__c = accTriggerNewMap.get(item.Accountid).vip__c;
+        }
+        update allContact;
+    }
+    
+    
     public static void updateDescription(
     List<Account> accTriggerNew,
     List<account> accTriggerOld,
@@ -194,6 +191,6 @@ public class AccountTriggerHandler {
             }
         }
     }
-    */
+    
     
 }
