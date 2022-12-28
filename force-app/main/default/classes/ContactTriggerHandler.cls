@@ -1,7 +1,29 @@
 public class ContactTriggerHandler {
+
+    public static void numberOfcontacts(List<Contact> newList) {
+        Set<id> accIds = new Set<id>();
+        for (contact item : newList) {
+            accIds.add(item.Accountid);
+        }
+        ContactTriggerHandler.numberOfcontactsFuture(accIds);
+    }
+    @future
+    public static void numberOfcontactsFuture(set<id> acId) {
+        List<Account> accList = [select id,name, Number_Of_Contacts__c, (select id,lastname from contacts) from Account where id in : acId];
+        for (account acc : accList) {
+            acc.Number_Of_Contacts__c = acc.contacts.size();
+        }
+        update accList;
+    }
+
+
+
+
+
     
     //^^ Yeni bir Contact mevcut bir Accounta bağlı olarak oluşturulduğunda Contact other phone bağlı olduğu Account phone olsun.
     //* version 1
+    /*
     public static void otherPhone(List<contact> newList,List<contact> oldList, Map<Id,contact> newMap, Map<Id,contact> oldMap){
         //insert edilen tum contactlardan accounta bagli olanlari secelim..
         set<id> conIds = new set<id>();
@@ -46,6 +68,7 @@ public class ContactTriggerHandler {
             con.OtherPhone = AccMap.get(con.accountId).phone;
         }
     }
+    */
 
 
     //^^ tr ödev - soru 21

@@ -1,6 +1,16 @@
 trigger ContactTrigger on Contact (before insert, after insert, before update, after update, after delete, after undelete) {
+    /*
+    if (Trigger.isAfter) {
+        if (Trigger.isInsert || Trigger.isUpdate || Trigger.isUndelete) {
+            ContactTriggerHandler.numberOfcontacts(Trigger.new);
+        }
+    }
+    */
 
+
+    
     //^^ Yeni bir Contact mevcut bir Accounta bağlı olarak oluşturulduğunda Contact other phone bağlı olduğu Account phone olsun.
+    /*
     //* version-1
     if(Trigger.isAfter && Trigger.isInsert){
         ContactTriggerHandler.otherPhone(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
@@ -9,7 +19,7 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
     if(Trigger.isBefore && Trigger.isInsert){
         ContactTriggerHandler.otherPhone2(Trigger.new, Trigger.newMap);
     }
-
+    */
 
 
 
@@ -102,7 +112,7 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
             }
         }
 
-        if (trigger.isBefore) {
+        if (trigger.isUpdate) {
             for (contact c : trigger.new) {
                 if (c.accountid != trigger.oldMap.get(c.id).Accountid) {
                     accountids.add(c.accountid);
