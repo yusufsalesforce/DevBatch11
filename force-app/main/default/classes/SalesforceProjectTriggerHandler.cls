@@ -48,8 +48,7 @@ public with sharing class SalesforceProjectTriggerHandler {
 
 
     //* aaa
-    public static void spStatusCompleted(List<salesforce_project__c> spTriggerNew, List<salesforce_project__c> spTriggerOld, 
-    Map<id,salesforce_project__c> spTriggerNewMap, Map<id,salesforce_project__c> spTriggerOldMap) {
+    public static void spStatusCompleted(List<salesforce_project__c> spTriggerNew, List<salesforce_project__c> spTriggerOld,Map<id,salesforce_project__c> spTriggerNewMap, Map<id,salesforce_project__c> spTriggerOldMap) {
         
         //get spIds whose status is changed to 'Completed'
         set<id> spCompleted = new set<id>();
