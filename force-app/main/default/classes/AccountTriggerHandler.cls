@@ -4,7 +4,7 @@ public class AccountTriggerHandler {
     
 
 
-    // soru 23 - Aynı isimde birden fazla Account oluşmasına müsade etmeyen ve kullanıcıya mesaj veren bir trigger (triggerHandlerClass) tasarlayınız. 
+    //^^ soru 23 - Aynı isimde birden fazla Account oluşmasına müsade etmeyen ve kullanıcıya mesaj veren bir trigger (triggerHandlerClass) tasarlayınız. 
     /*
     public static void sameNameValidation(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
         
@@ -86,7 +86,7 @@ public class AccountTriggerHandler {
     */
 
 
-    // soru 24 -Bir Account oluştuğunda, o Account'a bağlı bir Opportunity ve bir Contact oluşturan bir trigger (triggerHandlerClass) tasarlayınız.
+    //^^ soru 24 -Bir Account oluştuğunda, o Account'a bağlı bir Opportunity ve bir Contact oluşturan bir trigger (triggerHandlerClass) tasarlayınız.
     /*
     public static void createOppAndCnt(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
         List<Contact> cntList = new List<Contact>();
@@ -120,7 +120,7 @@ public class AccountTriggerHandler {
     
     
     
-    // tr ödev - soru 22
+    //^^ tr ödev - soru 22
     /*
     public static void annualRevenue(List<Account> newList, List<Account> oldList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
         
@@ -142,7 +142,8 @@ public class AccountTriggerHandler {
     
     
     
-    
+    //^^
+    /*
     public static void updateVIPforContacts(List<Account> accTriggerNew, List<account> accTriggerOld, Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
 
         set<id> accIds = new set<id>();
@@ -159,8 +160,10 @@ public class AccountTriggerHandler {
         }
         update allContact;
     }
-    
-    
+    */
+
+    //^^
+    /*
     public static void updateDescription(List<Account> accTriggerNew,List<account> accTriggerOld,Map<id, account> accTriggerNewMap,Map<id, account> accTriggerOldMap) {
 
         for (account eachAcc : accTriggerNew) {
@@ -188,7 +191,36 @@ public class AccountTriggerHandler {
             }
         }
     }
+    */
 
-
-    
+    //^^ SORU 26 - Account objecti'nin description field'inde bir update işlemi yapıldığında o account'a bağlı opportunity ve contact'ların description field'lerini account description ile aynı olacak şekilde update eden bir "future method" tasarlayınız.
+    public static void updateDescriptionTr(List<Account> newList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
+        set<id> accIds = new set<id>();
+        for (account acc : newList) {
+            if (acc.description != oldMap.get(acc.id).description) {
+                accIds.add(acc.Id);
+            }
+        }
+        if (!accIds.isEmpty()) {
+            updateOppContDes(accIds);
+            updateOpp(accIds);
+            System.debug('Liste dolu');
+        }
+    }
+    @future
+    public static void updateOppContDes(set<id> acId) {
+        List<Contact> cntList = [select id,lastname,description,Account.description from Contact where AccountId in : acId];
+        for (contact cnt : cntList) {
+            cnt.description = cnt.Account.description;
+        }
+        update cntList;
+    }
+    @future
+    public static void updateOpp(set<id> accId) {
+        List<opportunity> oppList = [select id,name,description,Account.description from opportunity where AccountId in : accId];
+        for (opportunity opp : oppList) {
+            opp.description = opp.Account.description;
+        }
+        update oppList;
+    }
 }

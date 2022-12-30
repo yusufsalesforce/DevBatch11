@@ -1,5 +1,5 @@
 public class ContactTriggerHandler {
-
+    /*
     public static void numberOfcontacts(List<Contact> newList) {
         Set<id> accIds = new Set<id>();
         for (contact item : newList) {
@@ -15,7 +15,7 @@ public class ContactTriggerHandler {
         }
         update accList;
     }
-
+    */
 
 
 

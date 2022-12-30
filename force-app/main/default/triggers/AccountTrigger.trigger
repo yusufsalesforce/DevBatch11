@@ -1,5 +1,8 @@
 trigger AccountTrigger on Account (before insert, before update,after insert, after update) {
-
+    //^^ SORU 26 - Account objecti'nin description field'inde bir update işlemi yapıldığında o account'a bağlı opportunity ve contact'ların description field'lerini account description ile aynı olacak şekilde update eden bir "future method" tasarlayınız.
+    if (Trigger.isAfter && Trigger.isUpdate) {
+        AccountTriggerHandler.updateDescriptionTr(Trigger.new, Trigger.newMap, Trigger.oldMap);
+    }
 
 
 
@@ -127,16 +130,6 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
         insert conList;
     }
     */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

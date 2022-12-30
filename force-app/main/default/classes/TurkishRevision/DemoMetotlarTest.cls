@@ -19,4 +19,19 @@ public class DemoMetotlarTest {
         System.assertEquals(1, accList.size());
         System.assert(1==accList.size());
     }
+    @isTest
+    private static void createUpdateContactTest() {
+        DemoMetotlar.createUpdateContact();
+        List<Account> accList = [select id,name from account]; 
+        System.assertEquals('SoftInnovas Inc.', accList[0].name);
+    }
+    @isTest
+    private static void createContact() {
+        Account acc = new Account();
+        acc.name = 'Salesforce';
+        insert acc;
+        DemoMetotlar.createContact();
+        List<Contact> cntList = [select id,lastname from contact where lastname = 'Doe' limit 1];
+        System.assertEquals(1, cntList.size());
+    }
 }
