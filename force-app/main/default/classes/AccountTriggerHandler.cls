@@ -143,7 +143,7 @@ public class AccountTriggerHandler {
     
     
     //^^
-    /*
+    
     public static void updateVIPforContacts(List<Account> accTriggerNew, List<account> accTriggerOld, Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
 
         set<id> accIds = new set<id>();
@@ -160,10 +160,10 @@ public class AccountTriggerHandler {
         }
         update allContact;
     }
-    */
+    
 
     //^^
-    /*
+    
     public static void updateDescription(List<Account> accTriggerNew,List<account> accTriggerOld,Map<id, account> accTriggerNewMap,Map<id, account> accTriggerOldMap) {
 
         for (account eachAcc : accTriggerNew) {
@@ -191,9 +191,15 @@ public class AccountTriggerHandler {
             }
         }
     }
-    */
+    
 
+
+
+
+
+    
     //^^ SORU 26 - Account objecti'nin description field'inde bir update işlemi yapıldığında o account'a bağlı opportunity ve contact'ların description field'lerini account description ile aynı olacak şekilde update eden bir "future method" tasarlayınız.
+    /*
     public static void updateDescriptionTr(List<Account> newList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
         set<id> accIds = new set<id>();
         for (account acc : newList) {
@@ -223,4 +229,5 @@ public class AccountTriggerHandler {
         }
         update oppList;
     }
+    */
 }
