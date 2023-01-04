@@ -1,20 +1,23 @@
 trigger SalesforceProjectTrigger on salesforce_project__c (before insert, after insert, before update, after update) {
-    /*
-    if (trigger.isAfter && trigger.isInsert) {
-        SalesforceProjectTriggerHandler.createDefaultTicket(Trigger.new);
+    if (Trigger.isAfter && Trigger.isInsert) {
+        //call trigger handler to CREATE salesforce ticket.
+        SalesforceProjectTriggerHandler.createDefaultTicket(Trigger.New);
 
-        // * call future method
-        System.debug('calling future method NOW');
-        SalesforceProjectTriggerHandler.spUpdateDescription(Trigger.newMap.keyset());
-        System.debug('calling future method DONE');
-    }
+        //call future method,
+        system.debug('calling future method NOW.');
+        Map<id, Salesforce_Project__c> spNewMap = trigger.newMap;
+        SalesforceProjectTriggerHandler.spUpdateDescription(spNewMap.keySet());
+        //we cannot know if future method ran successfully or not, because we don't have job id.
+        system.debug('called future method. DONE.');
 
-    if (trigger.isbefore && trigger.isUpdate) {
-        SalesforceProjectTriggerHandler.completeSPvalidation(Trigger.new, Trigger.old, Trigger.newMap, Trigger.oldMap);
     }
-    */
+    if (Trigger.isBefore && trigger.isUpdate) {
+        //call validation method here.
+        //SalesforceProjectTriggerHandler.completeSPvalidation(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
+    }
     if (Trigger.isAfter && Trigger.isUpdate) {
-        //*aaa
+        //a
         SalesforceProjectTriggerHandler.spStatusCompleted(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
+    
 }

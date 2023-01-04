@@ -1,54 +1,68 @@
-public with sharing class SalesforceProjectTriggerHandler {
-    /*
+public class SalesforceProjectTriggerHandler {
     public static void createDefaultTicket(List<salesforce_project__c> spTriggerNew) {
-        List<Salesforce_Ticket__c>  listST = new List<Salesforce_Ticket__c>();
+        try{
+            List<Salesforce_Ticket__c>  listST = new List<Salesforce_Ticket__c>();
 
-        for (salesforce_project__c eachSP : spTriggerNew) {
-            Salesforce_Ticket__c newST = new Salesforce_Ticket__c();
-            newST.Subject__c = 'Default ticket';
-            newST.Salesforce_Project__c = eachSP.Id;
-            listST.add(newST);
-        }
-        if (!listST.isEmpty()) {
-            insert listST;
+            for (salesforce_project__c eachSP : spTriggerNew) {
+                Salesforce_Ticket__c newST = new Salesforce_Ticket__c();
+                newST.Subject__c = 'Default ticket';
+                newST.Salesforce_Project__c = eachSP.Id;
+                newST.Priority__c = 'Medium';
+                listST.add(newST);
+            }
+            if (!listST.isEmpty()) {
+                List<database.SaveResult> results = database.insert(listST, false);
+                for(database.SaveResult r: results){
+                    if(r.isSuccess()){
+                        system.debug('inserted successfully, record id is ' + r.getId());
+                    } else {
+                        
+                        system.debug('errored out. errors are ' + r.getErrors());
+                    }
+                }
+            }
+        } catch(exception ex){
+            for(Salesforce_Project__c sp: spTriggerNew){
+                sp.addError('Error in creating Default ticket. Please contact your dear administrator');
+            }
         }
     }
 
-
-    public static void completeSPvalidation(List<salesforce_project__c> newList, List<salesforce_project__c> oldList, Map<Id,salesforce_project__c> newMap, Map<Id,salesforce_project__c> oldMap) {
-
-        set<id> spCompletedIds = new set<id>();
+    public static void completeSPvalidation(List<salesforce_project__c> spTriggerNew, List<salesforce_project__c> spTriggerOld, 
+    Map<id,salesforce_project__c> spTriggerNewMap, Map<id,salesforce_project__c> spTriggerOldMap) {
         
-        for (salesforce_project__c eachSP : newList) {
-            if (eachSP.status__c == 'Completed' && eachSP.status__c != oldMap.get(eachSP.id).status__c ) {
-                spCompletedIds.add(eachSP.id);
+        set<id> spCompletedIds = new set<id>();
+        for (salesforce_project__c eachSP : spTriggerNew) {
+            if (eachSP.Status__c == 'Completed' && eachSP.Status__c != SpTriggerOldMap.get(eachSP.id).Status__c) {
+                spCompletedIds.add(eachSP.Id);
             }
         }
 
-        List<Salesforce_Ticket__c> listST = [select id, status__c, salesforce_project__c from Salesforce_Ticket__c where salesforce_project__c in : spCompletedIds and status__c != 'Completed'];
-        
-        for (Salesforce_Ticket__c eachST : listST) {
-            salesforce_project__c spNew = newMap.get(eachST.salesforce_project__c);
-            spNew.addError('Cannot complete project because all tickets are not completed. Go away.');
+        //get all tickets which are not compelted.
+        List<Salesforce_Ticket__c> listST = [select id, status__c, salesforce_project__c from Salesforce_Ticket__c
+                                            where Salesforce_Project__c in :spCompletedIds
+                                            and status__c != 'Completed'];
+        for (salesforce_ticket__c eachST : listST) {
+            Salesforce_Project__c spNew = spTriggerNewMap.get(eachST.Salesforce_Project__c);
+            spNew.addError(
+                'Cannot complete project because all tickets are not completed. Go away.'
+            );
         }
     }
 
     @future
-    public static void spUpdateDescription(set<id> setSpId) {
-
-        List<salesforce_project__c> allSP = [select id,description__c from salesforce_project__c where id in : setSpId];
-        for (salesforce_project__c item : allSP) {
-            item.description__c += '. Updated from future';
+    public static void spUpdateDescription(Set<id> setSPId) {
+        system.debug('inside future method. Huhuuu');
+        List<Salesforce_Project__c> allSP = [select id, description__c from Salesforce_Project__c where id in :setSPId];
+        for (salesforce_project__c eachSP : allSP) {
+            eachSP.Description__c += '. Updated from future';
         }
         update allSP;
     }
-    */
 
-
-
-
-    //* aaa
-    public static void spStatusCompleted(List<salesforce_project__c> spTriggerNew, List<salesforce_project__c> spTriggerOld,Map<id,salesforce_project__c> spTriggerNewMap, Map<id,salesforce_project__c> spTriggerOldMap) {
+    //a
+    public static void spStatusCompleted(List<salesforce_project__c> spTriggerNew, List<salesforce_project__c> spTriggerOld, 
+    Map<id,salesforce_project__c> spTriggerNewMap, Map<id,salesforce_project__c> spTriggerOldMap) {
         
         //get spIds whose status is changed to 'Completed'
         set<id> spCompleted = new set<id>();
@@ -66,7 +80,7 @@ public with sharing class SalesforceProjectTriggerHandler {
 
     }
 
-    //* bbb
+    //b
     @future
     public static void updateTicketStatus(set<id> ProjectIds) {
         //get all tickets

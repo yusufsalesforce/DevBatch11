@@ -8,7 +8,7 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
 
 
 
-    
+    /*
     if (Trigger.isBefore) {
         system.debug('call updateDescription NOW.');
         AccountTriggerHandler.updateDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
@@ -22,7 +22,7 @@ trigger AccountTrigger on Account (before insert, before update,after insert, af
         //HERE we call handler method to update all contacts VIP field
         AccountTriggerHandler.updateVIPforContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
-    
+    */
 
 
 

@@ -59,7 +59,7 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
     }
     */
     
-    /*
+    
     if (Trigger.isBefore) {
         System.debug('We are in BEFORE');
         if (trigger.isInsert) {
@@ -71,8 +71,9 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
 
             ContactTriggerHandler.contactUpdateValidation2(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
         }
-
+        
     }
+    /*
     if (Trigger.isAfter) {
         System.debug('We are in AFTER');
         if (trigger.isInsert) {
@@ -83,8 +84,8 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
         }
 
     }
-
     */
+    
 
     // tr ödev - soru 21
     /*
