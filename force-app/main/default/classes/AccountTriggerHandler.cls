@@ -1,6 +1,29 @@
-public class AccountTriggerHandler {
-    
-
+public with sharing class AccountTriggerHandler {
+    public static void creatContactTryCatch(List<Account> newList) {
+        List<Contact> cntList = new List<Contact>();
+        try {
+            for (account ac : newList) {
+                contact c = new contact();
+                c.lastname = 'Test Contact 1';
+                c.AccountId = ac.id;
+                c.status__C = 'New';
+                cntList.add(c);
+                
+                contact c1 = new contact();
+                c1.lastname = 'Test Contact 2';
+                c1.AccountId = ac.id;
+                cntList.add(c1);
+                
+            }
+            if (!cntlist.isEmpty()) {
+                insert cntList;
+            }
+        } catch (Exception e) {
+            for (account ac : newList) {
+                ac.addError('Contact Status field is required'); 
+            }
+        }
+    }
     
 
 
@@ -199,6 +222,7 @@ public class AccountTriggerHandler {
 
     
     //^^ SORU 26 - Account objecti'nin description field'inde bir update işlemi yapıldığında o account'a bağlı opportunity ve contact'ların description field'lerini account description ile aynı olacak şekilde update eden bir "future method" tasarlayınız.
+    //* version 1
     /*
     public static void updateDescriptionTr(List<Account> newList, Map<Id,Account> newMap, Map<Id,Account> oldMap) {
         set<id> accIds = new set<id>();
@@ -227,6 +251,30 @@ public class AccountTriggerHandler {
         for (opportunity opp : oppList) {
             opp.description = opp.Account.description;
         }
+        update oppList;
+    }
+    */
+    //^^ SORU 26
+    //* version 2
+    /*
+    @future
+    public static void updateDescription(Set<Id> idList) {
+        //* Bu accountlara bagli tum contact ve opportunityleri alip descriptionlarini update etmem lazim. Accountun descriptionini contact ve opportunitylerin descriptionlarina koyariz..
+        List<Account> accList = [select id, description, (select id, description from contacts), (select id, description from Opportunities) from account where id IN :idList];
+
+        List<Contact> conList = new List<Contact>();
+        List<Opportunity> oppList = new List<Opportunity>();
+        for (Account ac : acclist) {           
+            for (contact c : ac.Contacts) {
+                c.Description = ac.Description;
+                conList.add(c);
+            }
+            for (opportunity op : ac.Opportunities) {
+                op.Description = ac.Description;
+                oppList.add(op);
+            }
+        }
+        update conList;
         update oppList;
     }
     */
