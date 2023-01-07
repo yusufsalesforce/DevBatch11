@@ -1,4 +1,7 @@
 
+
+//* CUSTOM SETTİNGS 
+
 Map<String, country_code__c> allCountryCodes = country_code__c.getAll();
 System.debug('all country codes => ' + allCountryCodes);
 
