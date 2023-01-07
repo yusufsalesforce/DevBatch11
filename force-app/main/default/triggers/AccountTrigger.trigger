@@ -1,8 +1,12 @@
 trigger AccountTrigger on Account (before insert, before update,after insert, after update) {
 
+
+    //* assignment 04 ocak
+    /*
     if (Trigger.isAfter && Trigger.isInsert) {
         AccountTriggerHandler.creatContactTryCatch(Trigger.new);
     }
+    */
 
 
 

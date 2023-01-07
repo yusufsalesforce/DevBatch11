@@ -1,4 +1,7 @@
 public with sharing class AccountTriggerHandler {
+
+    //* assignment 04 ocak
+    /*
     public static void creatContactTryCatch(List<Account> newList) {
         List<Contact> cntList = new List<Contact>();
         try {
@@ -24,6 +27,7 @@ public with sharing class AccountTriggerHandler {
             }
         }
     }
+    */
     
 
 

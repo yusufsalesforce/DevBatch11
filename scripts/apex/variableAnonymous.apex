@@ -9,3 +9,9 @@ lastName = 'HUNTER';
 
 string declareVar; // what will be value of this variable??? null
 String blankVar = ''; //blank
+
+
+
+
+
+

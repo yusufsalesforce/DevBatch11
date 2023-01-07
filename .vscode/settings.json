@@ -8,5 +8,5 @@
   "editor.renderWhitespace": "boundary",
   "editor.wordWrap": "on",
   "audioCues.lineHasError": "auto",
-  "window.zoomLevel": 1
+  "window.zoomLevel": 0
 }
