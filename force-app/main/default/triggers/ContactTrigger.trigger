@@ -59,7 +59,7 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
     }
     */
     
-    
+    /*
     if (Trigger.isBefore) {
         System.debug('We are in BEFORE');
         if (trigger.isInsert) {
@@ -73,6 +73,10 @@ trigger ContactTrigger on Contact (before insert, after insert, before update, a
         }
         
     }
+    */
+
+
+
     /*
     if (Trigger.isAfter) {
         System.debug('We are in AFTER');

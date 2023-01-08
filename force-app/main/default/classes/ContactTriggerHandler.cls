@@ -85,7 +85,7 @@ public class ContactTriggerHandler {
     */
 
 
-    
+    /*
     public static void contactUpdateValidation1(List<contact> conTriggerNew, List<contact> conTriggerOld,
     Map<id, contact> conTriggerNewMap, Map<id, contact> conTriggerOldMap) {
 
@@ -97,6 +97,10 @@ public class ContactTriggerHandler {
             }
         }
     }
+    */
+
+
+    /*
     public static void contactUpdateValidation2(List<contact> conTriggerNew, List<contact> conTriggerOld,
     Map<id, contact> conTriggerNewMap, Map<id, contact> conTriggerOldMap) {
 
@@ -108,4 +112,5 @@ public class ContactTriggerHandler {
             }
         }
     }
+    */
 }

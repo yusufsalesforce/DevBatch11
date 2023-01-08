@@ -170,7 +170,7 @@ public with sharing class AccountTriggerHandler {
     
     
     //^^
-    
+    /*
     public static void updateVIPforContacts(List<Account> accTriggerNew, List<account> accTriggerOld, Map<id, account> accTriggerNewMap, Map<id, account> accTriggerOldMap) {
 
         set<id> accIds = new set<id>();
@@ -218,7 +218,7 @@ public with sharing class AccountTriggerHandler {
             }
         }
     }
-    
+    */
 
 
 
