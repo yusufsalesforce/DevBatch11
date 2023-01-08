@@ -1,15 +1,19 @@
 
-Batch11 b11 = new Batch11();
-Database.executeBatch(b11);
+Schedulable11 ob = new Schedulable11();
+System.schedule('Tr rew zincir', '0 0 0 1 1/1 ? *', ob);
+
+
+
+
 
 
 Common Exception Methods()
 
-getCause: Returns the cause of the exception as an exception object.
-getLineNumber: Returns the line number from where the exception was thrown.
-getMessage: Returns the error message that displays for the user.
-getStackTraceString: Returns the stack trace of a thrown exception as a string.
-getTypeName: Returns the type of exception, such as DmlException, ListException, MathException, and so on.
+// getCause: Returns the cause of the exception as an exception object.
+// getLineNumber: Returns the line number from where the exception was thrown.
+// getMessage: Returns the error message that displays for the user.
+// getStackTraceString: Returns the stack trace of a thrown exception as a string.
+// getTypeName: Returns the type of exception, such as DmlException, ListException, MathException, and so on.
 
 catch(Exception e) {
     System.debug('Exception type caught: ' + e.getTypeName());    

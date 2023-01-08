@@ -13,7 +13,7 @@ public class Batch11 implements Database.Batchable<Sobject>{
         return q1;
     }
 
-    //execute-parca parca islem yapilir..
+    //^^execute-parca parca islem yapilir..
     public void execute(Database.BatchableContext bc, List<account> scope){
         List<Account> updateAccounts = new List<Account>();
         for (account acc : scope) {
@@ -27,7 +27,7 @@ public class Batch11 implements Database.Batchable<Sobject>{
         update updateAccounts;
     }
 
-    //finish-bitis mesaji veya mail gibi islemin bittigi ile ilgili haber verme gerceklesir..baska bir class cagrilmasi da burada olur.
+    //^^ finish-bitis mesaji veya mail gibi islemin bittigi ile ilgili haber verme gerceklesir..baska bir class cagrilmasi da burada olur.
     public void finish(Database.BatchableContext bc){
         System.debug('batch islemi bitti..');
         // Queuable111 q111 = new Queuable111();

@@ -33,7 +33,6 @@ public class Batch11Test {
         }
         insert conList;
     }
-
     @istest
     private static void batchTest() {
         test.startTest();
@@ -43,25 +42,29 @@ public class Batch11Test {
         List<Account> accList = [select id, name from account where AnnualRevenue = 10000];
         system.assertEquals(200, accList.size());
     }
-
     @istest
     private static void Queuable111Test() {
         test.startTest();
         System.enqueueJob(new Queuable111());
         test.stopTest();
     }
-
     @istest
     private static void Queuable112Test() {
         test.startTest();
         System.enqueueJob(new Queuable112());
         test.stopTest();
     }
-
     @istest
     private static void Queuable113Test() {
         test.startTest();
         System.enqueueJob(new Queuable113());
+        test.stopTest();
+    }
+    @istest
+    private static void Schedulable11Test() {
+        test.startTest();
+        Schedulable11 ob = new Schedulable11();
+        System.schedule('Tr rew zincir', '0 0 0 1 1/1 ? *', ob);
         test.stopTest();
     }
 }

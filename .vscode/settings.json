@@ -8,6 +8,6 @@
   "editor.renderWhitespace": "boundary",
   "editor.wordWrap": "on",
   "audioCues.lineHasError": "auto",
-  "window.zoomLevel": -1,
+  "window.zoomLevel": 0,
   "salesforcedx-vscode-core.show-cli-success-msg": false
 }
